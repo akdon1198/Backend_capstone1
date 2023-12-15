@@ -5,13 +5,14 @@ const dotenv = require("dotenv")
 const app = express()
 const jobRoute = require("./routes/jobroute")
 const authRoute = require("./routes/authroute")
+const cors = require("cors")
 dotenv.config()
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{console.log("database connected");})
 .catch(()=>{console.log("database not connected");})
-
+app.use(cors())
 app.get("/health", (req, res)=>{
     res.json({
         service : "jobplatform server",

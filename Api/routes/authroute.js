@@ -8,8 +8,8 @@ dotenv.config()
 router.post("/login", async (req, res) => {
     try{
         const {email, password} = req.body
-        console.log("hello1");
-        const user = await Usermodal.findOne({email : email})
+        const user = await Usermodal.findOne({email})
+        const hasmatch = await bcrypt.compare(password, user.password)
         if(hasmatch){
             const jwttoken = jwt.sign(user.toJSON(), process.env.JWT_KEY, {expiresIn:60})
             res.json({
@@ -30,16 +30,14 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", async (req, res)=>{
     try{
-        const exitinguser = await Usermodal.findOne({email : req.body.email})
-        if(exitinguser){
-            res.status(409).json({error : "Email already present"})
-        }
-        req.body.password = await bcrypt.hash(req.body.password, 10)
-        const user = new Usermodal(req.body)
+        const {name, email, mobile, password} = req.body
+        const hashedpassword = await bcrypt.hash(password, 10)
+        const user = new Usermodal({name, email, mobile, password : hashedpassword})
         await user.save()
-        // const jwttoken = jwt.sign(user.toJSON(), process.env.JWT_KEY, {expiresIn: 10})
+        const jwttoken = jwt.sign(user.toJSON(), process.env.JWT_KEY, {expiresIn: 10})
         res.json({
             message:"User registered successfuly",
+            jwttoken : jwttoken
         })
     }catch(err){
         res.json({

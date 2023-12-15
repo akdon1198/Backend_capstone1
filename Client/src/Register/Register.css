@@ -1,0 +1,94 @@
+/* General styling */
+.flow-content{
+    margin-bottom: 2rem;
+}
+
+button {
+    border-radius: 5px;
+    background: #ED5353;
+    width: 8rem;
+    border: none;
+    color: #FFF;
+    font-size: 16px;
+    padding: 8px 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+/* Main Container */
+.full-container{
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Left part */
+
+.left-container{
+    height: 100%;
+    width: 65%;
+    display: flex;
+}
+
+.form{
+    margin: auto;
+    width: 50%;
+}
+
+.form h1{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form h3{
+    color: #525252;
+    font-size: 16px;
+    margin-bottom: 1rem;
+}
+
+.form input{
+    border-radius: 5px;
+    border: 2px solid #C2C2C2;
+    height: 2.5rem;
+    background: #FFF;
+    width: 100%;
+    padding-left: 1rem;
+    outline: none;
+}
+
+.form .input{
+    margin-bottom: 1rem;
+}
+
+.form .input p{
+    color: #F00;
+    letter-spacing: 0.401px;
+}
+
+.form input::placeholder{
+    color: #525252;
+    font-size: 16px;
+}
+
+.form div span{
+    color: #525252;
+    font-size: 16px;
+}
+
+.form div a{
+    color: inherit;
+    font-size: 16px;
+    margin-left: 8px;
+    font-weight: inherit;
+}
+/* Right part */
+
+.right-container{
+    height: 100%;
+    width: 35%;
+}
+
+.right-container img{
+    height: 100%;
+    width: 100%;
+}
