@@ -1,0 +1,111 @@
+.addjobfull-container{
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* LEFT PART */
+.addjobleft{
+    height: 100%;
+    width: 60%;
+    display: flex;
+}
+
+.addjobform{
+    margin: auto;
+    width: 73%;
+    display: flex;
+    flex-direction: column;
+}
+
+.addjobform h1{
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.addjobform .labelinput{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.addjobform .labelinput label{
+    font-size: 16px;
+    font-weight: 400;
+    width: 10rem;   
+    margin-right: 5rem;
+}
+
+.addjobform .labelinput input{
+    border-radius: 4.603px;
+    border: 1.841px solid #C2C2C2;
+    outline: none;
+    width: 55%;
+    padding-left: 10px;
+}
+
+.addjobform .labelinput input::placeholder{
+    color: #ADADAD;
+    font-size: 15px;
+}
+
+.addjobform .labelinput select{
+    border-radius: 4.603px;
+    border: 1.841px solid #C2C2C2;
+    width: 8rem;
+    color: #ADADAD;
+    font-size: 15px;
+    outline: none;
+}
+
+.addjobform .labelinput select option{
+    color: #ADADAD;
+    font-size: 15px;
+}
+.addjobform .labelinput textarea{
+    border-radius: 4.603px;
+    border: 1.841px solid #C2C2C2;
+    width: 8rem;
+    outline: none;
+    resize: none;
+    width: 55%;
+    height: 4rem;
+    padding-left: 10px;
+}
+.addjobform .labelinput textarea::placeholder{
+    color: #ADADAD;
+    font-size: 15px;
+}
+
+.addjobform .button{
+    width: 12rem;
+    height: 3rem;
+    display: flex;
+    align-self: flex-end;
+    justify-content: space-between;
+}
+
+.addjobform .button button{
+    width: 40%;
+    height: 60%;
+    font-size: 13px;
+    border-radius: 6.508px;
+
+}
+
+.addjobform .button button:first-child{
+    border: 0.848px solid #CECECE;
+    background: #FFF;
+    color: #C2C2C2;
+}
+/* RIGHT PART */
+
+.addjobright{
+    height: 100%;
+    width: 40%;
+}
+
+.addjobright img{
+    height: 100%;
+    width: 100%;
+}

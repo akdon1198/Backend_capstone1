@@ -14,10 +14,13 @@ const islogin = (req, res, next) =>{
 }
 
 router.post("/jobdesc", async (req, res) =>{
+    let skillsarray = req.body.skillsrequired.split(",").map(skill => skill.trim())
+    req.body.skillsrequired = skillsarray
     try{
-        await JobdesModal.create(req.body)
+        const newjob = new JobdesModal(req.body)
+        await newjob.save()
         res.json({
-            message : "job details saved"
+            message : "job details saved"            
         })
     }catch(err){
         res.json({
@@ -45,6 +48,20 @@ router.get("/jobdesc", async (req, res) => {
         const jobs = await JobdesModal.find({skills : {$in : req.body.skills}, jobpos : req.body.jobtitle})
         res.json({
             jobs
+        })
+    }catch{
+        res.json({
+            message : "something went wrong"
+        })
+    }
+})
+
+router.get("/jobdesc/:id", async (req, res) => {
+    const {id} = req.params
+    try{
+        const job = await JobdesModal.findById(id)
+        res.json({
+            job
         })
     }catch{
         res.json({
