@@ -44,7 +44,14 @@ router.patch("/jobdesc/:id", async (req, res) => {
 })
 
 router.get("/jobdesc", async (req, res) => {
+    console.log(req.body)
     try{
+        if(JSON.stringify(req.body) == '{}'){
+            console.log(true)
+            res.json({
+                me : "e"
+            })
+        }
         const jobs = await JobdesModal.find({skills : {$in : req.body.skills}, jobpos : req.body.jobtitle})
         res.json({
             jobs
