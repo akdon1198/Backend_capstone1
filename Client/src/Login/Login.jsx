@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import signuplogo from "../images/signuplogo.png"
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import axios from "axios"
+import { useDispatch } from 'react-redux'
+import { handleuser } from '../jobslice'
 function Login() {
     const[err, seterr] = useState("")
+    const dispatch = useDispatch()
+    const history = useNavigate()
     const[field, setfield] = useState({
         email : "",
         password : ""
@@ -11,11 +15,14 @@ function Login() {
     function handlesubmit(){
         axios.post("http://localhost:5000/auth/login", field)
         .then(response => {
-            console.log(response.data);
             if(response.data.message == "oops something went wrong" || 
             response.data.message == "wrong credential"){
                 seterr("Invalid Email or password")
             }else{
+                console.log(response.data.jwttoken);
+                localStorage.setItem("token", JSON.stringify(response.data.jwttoken))
+                dispatch(handleuser(true))
+                history("/")
                 seterr("")
             }
         })

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import "./Register.css"
 import signuplogo from "../images/signuplogo.png"
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import axios from "axios"
 function Register() {
     const[nameerr, setnameerr] = useState("")
+    const history = useNavigate()
     const[emailerr, setemailerr] = useState("")
     const[mobileerr, setmobileerr] = useState("")
     const[passworderr, setpassworderr] = useState("")
@@ -53,6 +54,7 @@ function Register() {
             axios.post("http://localhost:5000/auth/register", field)
             .then(response => {
                 console.log(response.data);
+                history("/")
                 localStorage.setItem("token", JSON.stringify(response.data.jwttoken))
             }).catch(err=>{
                 console.log("error occured");

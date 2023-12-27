@@ -24,7 +24,7 @@ router.post("/jobdesc", async (req, res) =>{
         })
     }catch(err){
         res.json({
-            message : "something went wrong"
+            message : "something wrong happend"
         })
     }
 })
@@ -38,21 +38,18 @@ router.patch("/jobdesc/:id", async (req, res) => {
         })
     }catch(err){
         res.json({
-            message : "something went wrong"
+            message : "something happend"
         })
     }
 })
 
 router.get("/jobdesc", async (req, res) => {
-    console.log(req.body)
+    const {jobtitle, skills} = req.query
+    let query = {}
+    if(jobtitle) query = {jobpos : jobtitle}
+    if(skills) query.skillsrequired = {$in : skills.split("&")}
     try{
-        if(JSON.stringify(req.body) == '{}'){
-            console.log(true)
-            res.json({
-                me : "e"
-            })
-        }
-        const jobs = await JobdesModal.find({skills : {$in : req.body.skills}, jobpos : req.body.jobtitle})
+        const jobs = await JobdesModal.find(query)
         res.json({
             jobs
         })

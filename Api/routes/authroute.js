@@ -11,10 +11,10 @@ router.post("/login", async (req, res) => {
         const user = await Usermodal.findOne({email})
         const hasmatch = await bcrypt.compare(password, user.password)
         if(hasmatch){
-            const jwttoken = jwt.sign(user.toJSON(), process.env.JWT_KEY, {expiresIn:60})
+            const jwttoken = jwt.sign(user.toJSON(), process.env.JWT_KEY, {expiresIn:180})
             res.json({
                 message : "user login successfuly",
-                jwttoken
+                jwttoken : jwttoken
             })
         }else{
             res.json({

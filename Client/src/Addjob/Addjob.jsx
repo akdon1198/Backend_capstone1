@@ -2,28 +2,44 @@ import React , {useEffect, useState}from 'react'
 import "./Addjob.css"
 import addjob from "../images/addjob.png"
 import axios from 'axios'
+import {useSelector} from "react-redux"
+import { commonurljobs } from '../Constant'
 function Addjob() {
+    const {jobdata} = useSelector(store => store.job)
+    console.log(jobdata);
     const[jobfield, setjobfield] = useState({
-        companyname : "",
-        logourl : "",
-        jobpos : "",
-        salary : "",
-        type : "",
-        remote : "",
-        location : "",
-        jobdes : "",
-        aboutcompany : "",
-        skillsrequired : "",
-        information : ""
+        companyname : jobdata.aboutcompany || "",
+        logourl : jobdata.logourl || "",
+        jobpos : jobdata.jobpos || "",
+        salary : jobdata.salary || "",
+        type : jobdata.type || "",
+        remote : jobdata.remote || "",
+        location : jobdata.location || "",
+        jobdes : jobdata.jobdes || "",
+        aboutcompany : jobdata.aboutcompany || "",
+        skillsrequired : jobdata.skillsrequired || "",
+        information : jobdata.information || ""
     })
+    console.log(jobfield);
     function handleaddjob(){
-        axios.post("http://localhost:5000/job/jobdesc", jobfield)
-        .then(response =>{
-            console.log(response.data);
-        })
-        .catch(err => {
-            console.log("error occured");
-        })
+        let jsonjob = jobdata
+        if(JSON.stringify(jsonjob) != "{}"){
+            axios.patch(`${commonurljobs}/${jobdata._id}`, jobfield)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }else{
+            axios.post("http://localhost:5000/job/jobdesc", jobfield)
+            .then(response =>{
+                console.log(response.data);
+            })
+            .catch(err => {
+                console.log("error occured");
+            })
+        }
     }
     function handlecancel(){
         console.log("clicked");

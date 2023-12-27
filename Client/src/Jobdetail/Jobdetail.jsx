@@ -3,12 +3,19 @@ import "./Jobdetail.css"
 import userimg from "../images/userimg.png"
 import navbar from "../images/navbar.png"
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { adddata } from '../jobslice'
+import { commonurljobs } from '../Constant'
 function Jobdetail() {
   const history = useNavigate()
+  const location = useLocation();
+  const id = location.pathname.split("/")[2]
+  const dispatch = useDispatch()
+  const job = useSelector(store => store.job)
   const[jobdetail, setjobdetail] = useState("")
   useEffect(()=>{
-    axios.get("http://localhost:5000/job/jobdesc/657ebbf5780eb524af9010fa")
+    axios.get(`${commonurljobs}/${id}`)
     .then(response =>{
       setjobdetail(response.data.job)
     })
@@ -17,6 +24,7 @@ function Jobdetail() {
     })
   },[])
   function Editjob(){
+    dispatch(adddata(jobdetail))
     history("/addjob")
   }
   return (
@@ -25,15 +33,19 @@ function Jobdetail() {
             <img src={navbar} alt="navbar" />
             <div>
               <h2>Jobfinder</h2>
-              {/* <div className="button-container">
+              <div className="button-container">
+                <NavLink to = "/login">
                 <button>Login</button>
+                </NavLink>
+                <NavLink to = "/register">
                 <button>Register</button>
-              </div> */}
-              <div className="logout">
+                </NavLink>
+              </div>
+              {/* <div className="logout">
                 <h3 style={{color:"#fff"}}>Logout</h3>
                 <h3 style={{color:"#fff"}}>Hello!Recruiter</h3>
                 <img src={userimg} alt="" style={{height : "2rem", width:"2rem"}}/>
-              </div>
+              </div> */}
             </div>
         </div>
         <div className="jobdetailpage">
